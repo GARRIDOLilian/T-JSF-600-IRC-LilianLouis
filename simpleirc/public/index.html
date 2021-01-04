@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Simple IRC</title>
+		<link rel="stylesheet" type="text/css" href="../src/index.css">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+
+	<body id="all">
+		<div id="chat">
+			<h1>Simple IRC</h1>
+			<div id="chat_content"></div>
+			<form action="#" method="post">
+				<div>
+					<input type="text" name="chat_message" id="chat_message">
+					<input id="btn" type="submit" value="Send">
+				</div>
+			</form>
+		</div>
+
+		<script src="socket.io/socket.io.js"></script>
+		<script type="text/javascript">
+			var socket = io.connect('http://localhost:8080');
+			$("form").submit(function() {
+				socket.emit('addMessage', $("#chat_message").val());
+				$("#chat_message").val('');
+				return false;
+			})
+
+			socket.on('newMessage', function(message) {
+				if(message === "") {
+					return;
+				}
+				else {
+					$("#chat_content").append("<div class='message'>" + message + "</div>");
+				}
+			})
+		</script>
+	</body>
+
+</html>
