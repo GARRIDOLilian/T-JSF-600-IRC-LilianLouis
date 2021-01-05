@@ -10,34 +10,20 @@
 	</head>
 
 	<body id="all">
-		<div id="chat">
+		<div class="nicknameblock">
 			<h1>Simple IRC</h1>
-			<div id="chat_content"></div>
-			<form action="#" method="post">
-				<div>
-					<input type="text" name="chat_message" id="chat_message">
-					<input id="btn" type="submit" value="Send">
-				</div>
+			<form action="index.html" method="post">
+				<label for="nickname">Enter your nickname</label>
+				<br/>
+				<input id="nickname" type="text" name="nickname" value="Anonymous" placeholder="Anonymous">
+				<br/>
+				<input id="btn" type="submit" name="submit" value="Send">
 			</form>
 		</div>
 
 		<script src="socket.io/socket.io.js"></script>
 		<script type="text/javascript">
-			var socket = io.connect('http://localhost:8080');
-			$("form").submit(function() {
-				socket.emit('addMessage', $("#chat_message").val());
-				$("#chat_message").val('');
-				return false;
-			})
 
-			socket.on('newMessage', function(message) {
-				if(message === "") {
-					return;
-				}
-				else {
-					$("#chat_content").append("<div class='message'>" + message + "</div>");
-				}
-			})
 		</script>
 	</body>
 

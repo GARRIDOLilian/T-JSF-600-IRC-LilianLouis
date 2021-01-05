@@ -1,40 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 body {
-  overflow-x:hidden;
   font-family: 'Roboto', sans-serif;
   background-color:rgb(29, 29, 29);
 }
 
 h1 {
   text-align:center;
-  margin:8px;
+  margin-top:50px;
   color:white;
 }
 
-#chat {
-  padding:0;
-  margin:0;
-}
+.nicknameblock {
+  width: 400px;
+	height: 300px;
+	background-color:rgb(40, 40, 40);
+  border-radius:50px;
 
-#chat_content {
-  font-size:20px;
-  width:100%;
-  height:500px;
-  overflow-y:scroll;
-  border-radius:30px;
-  background-color:rgb(64, 64, 64);
-  color:white;
-  overflow-x:hidden;
-}
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 
-#chat_content .message {
-  padding: 5px;
-  background-color:rgb(64, 64, 64);
-}
-
-#chat_content .message:nth-child(2n) {
-  background-color:rgb(47, 47, 47);
+	margin: auto;
 }
 
 form {
@@ -43,11 +32,18 @@ form {
   width:100%;
 }
 
+form label {
+  color:white;
+  margin-top:10px;
+}
+
 form input {
   display:inline-block;
-  width:90%;
-  border-radius:50px;
-  padding: 10px;
+  width:200px;
+  border-radius:10px;
+  padding: 12px;
+  margin-top:10px;
+
   background-color:rgb(64, 64, 64);
   border:none;
   color:white;
@@ -61,8 +57,9 @@ form input:focus {
 
 #btn {
   width:100px;
-  padding:10px;
-  border-radius:50px;
+  padding:12px;
+  margin-top:20px;
+  border-radius:10px;
   background-color:rgb(64, 64, 64);
   transition-duration:300ms;
   color:white;

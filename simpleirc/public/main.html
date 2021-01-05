@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Simple IRC</title>
+		<link rel="stylesheet" type="text/css" href="../src/main.css">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+
+	<body id="all">
+		<div id="chat">
+			<h1>Simple IRC</h1>
+			<div id="chat_content"></div>
+			<form action="#" method="post">
+				<div>
+					<input placeholder="Enter message" type="text" name="chat_message" id="chat_message">
+					<input id="btn" type="submit" value="Send">
+				</div>
+			</form>
+		</div>
+
+		<script src="socket.io/socket.io.js"></script>
+		<script type="text/javascript">
+			var socket = io.connect('http://localhost:8080/');
+
+			$("form").submit(function() {
+				socket.emit('addMessage', $("#chat_message").val());
+				$("#chat_message").val('');
+				return false;
+			})
+			//NewMesssage
+			socket.on('newMessage', function(message) {
+				if(message === "") {
+					return;
+				}
+				else {
+					$("#chat_content").append(`<div class='message'><p class='texter'>[${message.time}] ${message.nickname} : </p> <p class='texter'>${message.text}</p></div>`);
+					//ScrollBottom
+					document.getElementById('chat_content').scrollTop = document.getElementById('chat_content').scrollHeight;
+				}
+			})
+			//ConnectionMessage
+			socket.on('connected', function(message) {
+					$("#chat_content").append("<div class='message'><p class='texter'>" + message + "</p></div>");
+					//ScrollBottom
+					document.getElementById('chat_content').scrollTop = document.getElementById('chat_content').scrollHeight;
+			})
+			//disconnectMessage
+			socket.on('disconnected', function(message) {
+					$("#chat_content").append("<div class='message'><p class='texter'>" + message + "</p></div>");
+					//ScrollBottom
+					document.getElementById('chat_content').scrollTop = document.getElementById('chat_content').scrollHeight;
+			})
+		</script>
+	</body>
+
+</html>
