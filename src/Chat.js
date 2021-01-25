@@ -23,12 +23,12 @@ export default class Chat extends Component
                 <div class="chat-container">
                     <header class="chat-header">
                     <h1><i class="fas fa-comment"></i> IRC</h1>
-                    <a href="index.html" class="btn2">Leave Room</a>
+                    <a href="/" class="btn2">Leave Room</a>
                     </header>
                     <main class="chat-main">
                     <div class="chat-sidebar">
                         <h3><i class="fas fa-comments"></i> Room</h3>
-                        <h2 id="room-name"></h2>
+                        <h2 id="room-name"> </h2>
                         <h3><i class="fas fa-users"></i> Users</h3>
                         <ul id="users"></ul>
                     </div>
