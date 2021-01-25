@@ -44,7 +44,7 @@ export default class App extends Component
                   <option value="Global">Global</option>
                 </select>
               </div>
-              <button type="submit" class="btn"><Link to="/chat">Join Chat</Link></button>
+              <Link to="/chat"><button type="submit" class="btn">Join Chat</button></Link>
             </form>
           </main>
         </div>
@@ -53,7 +53,7 @@ export default class App extends Component
         <script src="js/index.js"></script>
       </body>
       </Router>
-    
+
     );
   }
 }
