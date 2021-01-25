@@ -1,5 +1,6 @@
-const express = require("express");
-const app = express();
+var express = require("express");
+var session = require('express-session');
+var app = express();
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
@@ -46,15 +47,29 @@ var io = require('socket.io')(server);
 
 io.on('connection', socket => {
 
+  //Session
+  socket.on('session', nick => {
+    app.use(session({
+      secret: "test",
+      resave: true,
+      saveUninitialized: true
+    }));
+    console.log("1");
+    app.use('/',function(req,res){
+        console.log("2");
+        console.log(req.session);
+    });
+  })
+
   socket.broadcast.emit('connected', "Un utilisateur s'est connecté");
 
   socket.on('addMessage', msg => {
     io.emit("newMessage", formatMessage("Name", msg));
-  })
+  });
 
   socket.on('disconnect', () => {
     socket.broadcast.emit('disconnected', "Un utilisateur s'est déconnecté");
-  })
+  });
 });
 
 server.listen(8080, function() {
